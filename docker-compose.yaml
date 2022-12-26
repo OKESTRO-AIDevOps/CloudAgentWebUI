@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+        cake8s:
+                build: ./ADM
+                container_name: cake8s
+                ports:
+                        - "80:80"
+                        - "8080:8080"
+                        - "3000:3000"
+                        - "7777:7777"
+
+                volumes:
+                        - /var/run/docker.sock:/var/run/docker.sock
+                        - ./ADM/jenkins_data:/root/.jenkins
+                        - ./ADM/grafana_data:/var/lib/grafana
+

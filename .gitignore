@@ -1,0 +1,8 @@
+ADM/grafana_data
+ADM/jenkins_data
+ADM/jenkins_init_pass.txt
+ADM/config
+lwcli_pkg/cake8s/ADM/grafana_data
+lwcli_pkg/cake8s/ADM/jenkins_data
+lwcli_pkg/cake8s/ADM/jenkins_init_pass.txt
+lwcli_pkg/cake8s/ADM/config
