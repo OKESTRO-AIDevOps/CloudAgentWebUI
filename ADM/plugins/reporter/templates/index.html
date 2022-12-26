@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CAKE8S</title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+
+    <div style="position: absolute; height: 100%; left: 0; width: 80%">
+        <table>
+            <tr>
+                <th>
+                    Kubernetes API Server Address 
+                </th>
+                <td id="kubeapiaddr">
+                    
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Kubernetes All Resources
+                </th>
+                <td id="kubeallresources">
+                </td>    
+            </tr>
+            <tr>
+                <th>
+                    Kubernetes Events
+                </th>
+                <td id="kubeevents">
+                </td>    
+            </tr>
+        </table>
+    </div>
+    <div style="position: absolute; height: 100%; right: 0; width: 20%">
+        <table>
+            <tr>
+                <td>
+                    <button onclick="tabOpen('http://localhost:7777')" type="button"> Octant</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="tabOpen('http://localhost:8080')" type="button"> Jenkins</button>
+                </td>    
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="tabOpen('http://localhost:3000')" type="button"> Grafana</button>
+                </td>    
+            </tr>
+        </table>
+
+    </div>
+
+
+    <script>
+
+        function tabOpen(domain){
+            window.open(domain, '_blank');
+        }
+
+        async function kubeInfoLoad(){
+
+            let kubeapiaddr = document.getElementById('kubeapiaddr') 
+            let kubeallresources = document.getElementById('kubeallresources')
+            let kubeevents = document.getElementById('kubeevents')
+
+            let dataObj = {};
+
+            await axios.get('http://localhost/report')
+
+            .then(function(res){
+                dataObj = res.data
+                kubeapiaddr.innerHTML = '<pre>' + dataObj["kubeapiaddr"] + '</pre>';
+                kubeallresources.innerHTML = '<pre>' + dataObj["kubeallresources"] + '</pre>';
+                kubeevents.innerHTML = '<pre>'  + dataObj["kubeevents"]  + '</pre>';
+            })
+
+            .catch(function(err){
+                alert("Error: "+String(err))
+            })
+
+        }
+
+        kubeInfoLoad();
+    
+    
+    </script>
+
+</body>
+</html>
